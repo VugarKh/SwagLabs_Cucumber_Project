@@ -1,8 +1,10 @@
 package com.saucedemo.step_definitions;
 
+import com.saucedemo.pages.BasePage;
 import com.saucedemo.pages.SwagLabHomePage;
 import com.saucedemo.utilities.ConfigurationReader;
 import com.saucedemo.utilities.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,13 +12,17 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class SwagLabStepDef {
 
     SwagLabHomePage swag = new SwagLabHomePage();
+    BasePage basePage = new BasePage();
 
     @Given("user is on SwagLabs login page")  //Test1
     public void user_is_on_swag_labs_login_page() {
-    Driver.getDriver().get(ConfigurationReader.getProperty("url"));
+        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
         Assert.assertEquals("Swag Labs", Driver.getDriver().getTitle());
     }
 
@@ -39,101 +45,67 @@ public class SwagLabStepDef {
     }
 
 
-
-
-
-    @Given("user is on home page")  //Test2
-    public void user_is_on_home_page() {
-
-    }
-    @Then("user should verify that {int} items are displayed")
+    @Then("user should verify that {int} items are displayed")//test2
     public void user_should_verify_that_items_are_displayed(Integer int1) {
 
     }
 
 
+    @When("user add all item to cart")
+    public void userAddAllItemToCart() throws InterruptedException {
+        ArrayList<String> webElements = new ArrayList<>(Arrays.asList("sauce-labs-backpack", "sauce-labs-bike-light", "sauce-labs-bolt-t-shirt", "sauce-labs-fleece-jacket", "sauce-labs-onesie", "test.allthethings()-t-shirt-(red)"));
 
-
-
-    @Given("user is on landing home page")  //Test 3
-    public void user_is_on_landing_home_page() {
-
+        for (int i = 0; i < webElements.size(); i++) {
+            basePage.addtoCart(webElements.get(i)).click();
+            Thread.sleep(1000);
+        }
     }
 
-    @When("user add item to cart")
-    public void user_add_item_to_cart() {
 
-    }
-    @When("user should be able to click on cart and verify that item was added to the cart")
-    public void user_should_be_able_to_click_on_cart_and_verify_that_item_was_added_to_the_cart() {
-
-    }
-    @Then("user should be able to click continue shopping")
-    public void user_should_be_able_to_click_continue_shopping() {
-
+    @And("user should be able to click on cart button")
+    public void userShouldBeAbleToClickOnCartButton() {
+        basePage.shoppingCart.click();
     }
 
 
 
-
-
-
-    @Given("user is on cart page")  //Test 4
-    public void user_is_on_cart_page() {
-
+    @Then("verify that user is on the cart page")
+    public void verifyThatUserIsOnTheCartPage() {
     }
-    @Given("user should be able to see all {int} items on cart")
-    public void user_should_be_able_to_see_all_items_on_cart(Integer int1) {
 
+    @And("user should be able to see all {int} items on cart")
+    public void userShouldBeAbleToSeeAllItemsOnCart(int arg0) {
     }
+
     @When("user click on checkout button")
-    public void user_click_on_checkout_button() {
-
+    public void userClickOnCheckoutButton() {
     }
+
     @Then("user should be able to see {string}")
-    public void user_should_be_able_to_see(String string) {
-
+    public void userShouldBeAbleToSee(String arg0) {
     }
 
-
-
-
-
-    @Given("user is on checkout information page")  //Test 5
-    public void user_is_on_checkout_information_page() {
-
-    }
     @When("user should be able to type:")
-    public void user_should_be_able_to_type(io.cucumber.datatable.DataTable dataTable) {
-
+    public void userShouldBeAbleToType() {
     }
-    @When("user click on continue button")
-    public void user_click_on_continue_button() {
 
+    @And("user click on continue button")
+    public void userClickOnContinueButton() {
     }
+
     @Then("user should be able to see {string} page")
-    public void user_should_be_able_to_see_page(String string) {
-
+    public void userShouldBeAbleToSeePage(String arg0) {
     }
 
-
-
-
-    @Given("user is on checkout overview page")  //Test 6
-    public void user_is_on_checkout_overview_page() {
-
-    }
     @When("user should be able to see total price")
-    public void user_should_be_able_to_see_total_price() {
-
+    public void userShouldBeAbleToSeeTotalPrice() {
     }
-    @When("user should be able click on {string} button")
-    public void user_should_be_able_click_on_button(String string) {
 
+    @And("user should be able click on {string} button")
+    public void userShouldBeAbleClickOnButton(String arg0) {
     }
+
     @Then("user should be able to see {string} text")
-    public void user_should_be_able_to_see_text(String string) {
-
+    public void userShouldBeAbleToSeeText(String arg0) {
     }
-
 }
