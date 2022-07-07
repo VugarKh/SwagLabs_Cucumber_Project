@@ -1,29 +1,43 @@
 package com.saucedemo.step_definitions;
 
+import com.saucedemo.pages.SwagLabHomePage;
+import com.saucedemo.utilities.ConfigurationReader;
 import com.saucedemo.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class SwagLabStepDef {
+
+    SwagLabHomePage swag = new SwagLabHomePage();
+
     @Given("user is on SwagLabs login page")  //Test1
     public void user_is_on_swag_labs_login_page() {
-
+    Driver.getDriver().get(ConfigurationReader.getProperty("url"));
+        Assert.assertEquals("Swag Labs", Driver.getDriver().getTitle());
     }
+
     @When("user enters valid username")
     public void user_enters_valid_username() {
-
+        swag.username.sendKeys(ConfigurationReader.getProperty("username"));
     }
+
     @When("user enters valid password")
     public void user_enters_valid_password() {
-
+        swag.password.sendKeys(ConfigurationReader.getProperty("password"));
     }
+
     @Then("user should see home page")
     public void user_should_see_home_page() {
-
+        swag.loginButton.click();
+        String actual = swag.homePageVerification.getText();
+        String expected = "PRODUCTS";
+        Assert.assertEquals(expected, actual);
     }
+
 
 
 
@@ -36,6 +50,7 @@ public class SwagLabStepDef {
     public void user_should_verify_that_items_are_displayed(Integer int1) {
 
     }
+
 
 
 
@@ -57,6 +72,7 @@ public class SwagLabStepDef {
     public void user_should_be_able_to_click_continue_shopping() {
 
     }
+
 
 
 
