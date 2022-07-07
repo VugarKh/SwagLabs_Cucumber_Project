@@ -1,6 +1,8 @@
 package com.saucedemo.step_definitions;
 
 import com.saucedemo.pages.BasePage;
+import com.saucedemo.pages.CartPage;
+import com.saucedemo.pages.CheckoutPage;
 import com.saucedemo.pages.SwagLabHomePage;
 import com.saucedemo.utilities.ConfigurationReader;
 import com.saucedemo.utilities.Driver;
@@ -19,7 +21,8 @@ public class SwagLabStepDef {
 
     SwagLabHomePage swag = new SwagLabHomePage();
     BasePage basePage = new BasePage();
-
+    CartPage cartPage = new CartPage();
+    CheckoutPage checkoutPage = new CheckoutPage();
     @Given("user is on SwagLabs login page")  //Test1
     public void user_is_on_swag_labs_login_page() {
         Driver.getDriver().get(ConfigurationReader.getProperty("url"));
@@ -57,7 +60,7 @@ public class SwagLabStepDef {
 
         for (int i = 0; i < webElements.size(); i++) {
             basePage.addtoCart(webElements.get(i)).click();
-            Thread.sleep(1000);
+
         }
     }
 
@@ -71,18 +74,28 @@ public class SwagLabStepDef {
 
     @Then("verify that user is on the cart page")
     public void verifyThatUserIsOnTheCartPage() {
+        String expectedHeader = "YOUR CART";
+        String actualHeader =cartPage.your_cart.getText();
+        Assert.assertEquals(expectedHeader,actualHeader);
+
     }
 
     @And("user should be able to see all {int} items on cart")
-    public void userShouldBeAbleToSeeAllItemsOnCart(int arg0) {
+    public void userShouldBeAbleToSeeAllItemsOnCart(int numberOfItems) {
+        Assert.assertEquals(numberOfItems,cartPage.CartItems.size());
+
     }
 
     @When("user click on checkout button")
     public void userClickOnCheckoutButton() {
+        cartPage.checkout_button.click();
     }
 
     @Then("user should be able to see {string}")
-    public void userShouldBeAbleToSee(String arg0) {
+    public void userShouldBeAbleToSee(String expectedHeader) {
+
+        String actualHeader = checkoutPage.Checkout_Your_Information.getText();
+        Assert.assertEquals(expectedHeader,actualHeader);
     }
 
     @When("user should be able to type:")
