@@ -1,5 +1,6 @@
 package com.saucedemo.pages;
 
+import com.saucedemo.utilities.ConfigurationReader;
 import com.saucedemo.utilities.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,5 +24,12 @@ public class SwagLabHomePage {
     @FindBy(xpath = "//div[@class='header_secondary_container']//span[.='Products']")
     public WebElement homePageVerification;
 
+
+    public  void login (){
+        Driver.getDriver().get("url");
+        username.sendKeys(ConfigurationReader.getProperty("username"));
+        password.sendKeys(ConfigurationReader.getProperty("password"));
+        loginButton.click();
+    }
 
 }

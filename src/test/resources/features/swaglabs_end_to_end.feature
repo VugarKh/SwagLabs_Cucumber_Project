@@ -12,29 +12,17 @@ Feature: Shopping feature
     And user enters valid password
     Then user should see home page
 
-  @test2
-  Scenario:
-    Given user is on landing home page
     Then user should verify that 6 items are displayed
 
+    When user add all item to cart
+    And user should be able to click on cart button
 
-  @test3
-  Scenario:
-    Given user is on home page
-    When user add item to cart
-    And user should be able to click on cart and verify that item was added to the cart
-    Then  user should be able to click continue shopping
-
-  @test4
-  Scenario:
-    Given user is on cart page
+    Then verify that user is on the cart page
     And user should be able to see all 6 items on cart
     When user click on checkout button
     Then user should be able to see "CHECKOUT: YOUR INFORMATION"
 
-  @test5
-  Scenario:
-    Given user is on checkout information page
+
     When user should be able to type:
       | first name      |
       | last name       |
@@ -43,9 +31,6 @@ Feature: Shopping feature
     And user click on continue button
     Then user should be able to see "CHECKOUT: OVERVIEW" page
 
-  @test6
-  Scenario:
-    Given user is on checkout overview page
     When user should be able to see total price
     And user should be able click on "Finish" button
     Then user should be able to see "THANK YOU FOR YOUR ORDER" text
