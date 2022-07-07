@@ -22,7 +22,7 @@ public class CartPage {
 
 
 
-    @FindBy(linkText="Your Cart")
+    @FindBy(xpath = "//span[.='Your Cart']")
     public WebElement your_cart;
 
     @FindBy(linkText = "Sauce Labs Backpack")

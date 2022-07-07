@@ -5,7 +5,7 @@ Feature: Shopping feature
   all items to the cart, user should be able to see all items in the cart.Verify total price and user should be able
   to proceed to checkout.
 
-  @test1
+
   Scenario:
     Given user is on SwagLabs login page
     When user enters valid username
@@ -16,6 +16,7 @@ Feature: Shopping feature
 
     When user add all item to cart
     And user should be able to click on cart button
+
 
     Then verify that user is on the cart page
     And user should be able to see all 6 items on cart
