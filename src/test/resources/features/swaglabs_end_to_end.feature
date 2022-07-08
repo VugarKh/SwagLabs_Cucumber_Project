@@ -24,10 +24,10 @@ Feature: Shopping feature
     Then user should be able to see "CHECKOUT: YOUR INFORMATION"
 
 
-    When user should be able to type:
-      | first name      |
-      | last name       |
-      | zip/postal code |
+    When user should be able to type user information:
+      | first name      | James |
+      | last name       | Bond  |
+      | zip/postal code | 50505 |
 
     And user click on continue button
     Then user should be able to see "CHECKOUT: OVERVIEW" page

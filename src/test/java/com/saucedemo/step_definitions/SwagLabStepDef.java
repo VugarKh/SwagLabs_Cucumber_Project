@@ -1,9 +1,7 @@
 package com.saucedemo.step_definitions;
 
-import com.saucedemo.pages.BasePage;
-import com.saucedemo.pages.CartPage;
-import com.saucedemo.pages.CheckoutPage;
-import com.saucedemo.pages.SwagLabHomePage;
+import com.saucedemo.pages.*;
+import com.saucedemo.utilities.BrowserUtils;
 import com.saucedemo.utilities.ConfigurationReader;
 import com.saucedemo.utilities.Driver;
 import io.cucumber.java.en.And;
@@ -16,6 +14,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
 
 public class SwagLabStepDef {
 
@@ -23,7 +22,9 @@ public class SwagLabStepDef {
     BasePage basePage = new BasePage();
     CartPage cartPage = new CartPage();
     CheckoutPage checkoutPage = new CheckoutPage();
-    @Given("user is on SwagLabs login page")  //Test1
+    InformationPage informationPage = new InformationPage();
+
+    @Given("user is on SwagLabs login page")  //Test 1
     public void user_is_on_swag_labs_login_page() {
         Driver.getDriver().get(ConfigurationReader.getProperty("url"));
         Assert.assertEquals("Swag Labs", Driver.getDriver().getTitle());
@@ -48,13 +49,13 @@ public class SwagLabStepDef {
     }
 
 
-    @Then("user should verify that {int} items are displayed")//test2
+    @Then("user should verify that {int} items are displayed")  //Test 2
     public void user_should_verify_that_items_are_displayed(Integer int1) {
 
     }
 
 
-    @When("user add all item to cart")
+    @When("user add all item to cart")  //Test 3
     public void userAddAllItemToCart() throws InterruptedException {
         ArrayList<String> webElements = new ArrayList<>(Arrays.asList("sauce-labs-backpack", "sauce-labs-bike-light", "sauce-labs-bolt-t-shirt", "sauce-labs-fleece-jacket", "sauce-labs-onesie", "test.allthethings()-t-shirt-(red)"));
 
@@ -72,7 +73,7 @@ public class SwagLabStepDef {
 
 
 
-    @Then("verify that user is on the cart page")
+    @Then("verify that user is on the cart page")  //Test 4
     public void verifyThatUserIsOnTheCartPage() {
         String expectedHeader = "YOUR CART";
         String actualHeader =cartPage.your_cart.getText();
@@ -98,19 +99,25 @@ public class SwagLabStepDef {
         Assert.assertEquals(expectedHeader,actualHeader);
     }
 
-    @When("user should be able to type:")
-    public void userShouldBeAbleToType() {
+    @When("user should be able to type user information:")  //Test5
+    public void user_should_be_able_to_type_user_information(Map<String ,String> userInfo) {
+        checkoutPage.firstName.sendKeys(userInfo.get("first name"));
+        checkoutPage.lastName.sendKeys(userInfo.get("last name"));
+        checkoutPage.zipCode.sendKeys(userInfo.get("zip/postal code"));
     }
 
     @And("user click on continue button")
     public void userClickOnContinueButton() {
+        checkoutPage.continueBtn.click();
     }
 
     @Then("user should be able to see {string} page")
-    public void userShouldBeAbleToSeePage(String arg0) {
+    public void userShouldBeAbleToSeePage(String checkoutHeader) {
+        String actualHeader = informationPage.checkoutHeader.getText();
+        Assert.assertEquals(checkoutHeader,actualHeader);
     }
 
-    @When("user should be able to see total price")
+    @When("user should be able to see total price")  //Test 6
     public void userShouldBeAbleToSeeTotalPrice() {
     }
 
