@@ -16,4 +16,17 @@ public class CheckoutPage {
     @FindBy(xpath = "//span[@class='title']")
     public WebElement Checkout_Your_Information;
 
+    @FindBy (id = "first-name")
+    public WebElement firstName;
+
+    @FindBy (css = "#last-name")
+    public WebElement lastName;
+
+    @FindBy (css = "#postal-code")
+    public WebElement zipCode;
+
+    @FindBy (xpath = "//input[@id='continue']")
+    public WebElement continueBtn;
+
+
 }
