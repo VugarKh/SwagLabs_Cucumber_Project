@@ -1,7 +1,6 @@
 package com.saucedemo.step_definitions;
 
 import com.saucedemo.pages.*;
-import com.saucedemo.utilities.BrowserUtils;
 import com.saucedemo.utilities.ConfigurationReader;
 import com.saucedemo.utilities.Driver;
 import io.cucumber.java.en.And;
@@ -9,7 +8,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -18,11 +16,13 @@ import java.util.Map;
 
 public class SwagLabStepDef {
 
-    SwagLabHomePage swag = new SwagLabHomePage();
+    LoginPage swag = new LoginPage();
     BasePage basePage = new BasePage();
     CartPage cartPage = new CartPage();
     CheckoutPage checkoutPage = new CheckoutPage();
     InformationPage informationPage = new InformationPage();
+    CheckOutCompletePage checkOutCompletePage = new CheckOutCompletePage();
+    double getAllItemsTotalPrice =0;
 
     @Given("user is on SwagLabs login page")  //Test 1
     public void user_is_on_swag_labs_login_page() {
@@ -49,14 +49,17 @@ public class SwagLabStepDef {
     }
 
 
-    @Then("user should verify that {int} items are displayed")  //Test 2
-    public void user_should_verify_that_items_are_displayed(Integer int1) {
-
+    @Then("user should verify that {int} items are displayed and count expected price of all items")
+    public void userShouldVerifyThatItemsAreDisplayedAndCountExpectedPriceOfAllItems(int quantityOfItems) {
+        Assert.assertEquals(quantityOfItems, basePage.allItems.size());
+        for (WebElement each : basePage.prices) {
+            getAllItemsTotalPrice += Double.parseDouble(each.getText().substring(1));
+        }
     }
 
 
     @When("user add all item to cart")  //Test 3
-    public void userAddAllItemToCart() throws InterruptedException {
+    public void userAddAllItemToCart() {
         ArrayList<String> webElements = new ArrayList<>(Arrays.asList("sauce-labs-backpack", "sauce-labs-bike-light", "sauce-labs-bolt-t-shirt", "sauce-labs-fleece-jacket", "sauce-labs-onesie", "test.allthethings()-t-shirt-(red)"));
 
         for (int i = 0; i < webElements.size(); i++) {
@@ -117,15 +120,27 @@ public class SwagLabStepDef {
         Assert.assertEquals(checkoutHeader,actualHeader);
     }
 
-    @When("user should be able to see total price")  //Test 6
-    public void userShouldBeAbleToSeeTotalPrice() {
+    @And("verify that user is able to see total price and verify items total price equals to expected price of items")
+    public void verifyThatUserIsAbleToSeeTotalPriceAndVerifyItemsTotalPriceEqualsToExpectedPriceOfItems() {
+        Assert.assertTrue(informationPage.total.isDisplayed());
+        String[] split = informationPage.itemTotal.getText().split(" ");
+        int actualPrice= (int) Double.parseDouble(split[2].substring(1));
+        int expectedPrice= (int) getAllItemsTotalPrice;
+        Assert.assertEquals(expectedPrice,actualPrice);
     }
 
     @And("user should be able click on {string} button")
-    public void userShouldBeAbleClickOnButton(String arg0) {
+    public void userShouldBeAbleClickOnButton(String button) {
+        informationPage.finishBtn.click();
     }
 
-    @Then("user should be able to see {string} text")
-    public void userShouldBeAbleToSeeText(String arg0) {
+
+    @Then("user should be able to see {string} header")
+    public void userShouldBeAbleToSeeHeader(String expectedHeader) {
+        Assert.assertEquals(expectedHeader,checkOutCompletePage.thankYouMsgHeader.getText());
+
     }
+
+
+
 }
