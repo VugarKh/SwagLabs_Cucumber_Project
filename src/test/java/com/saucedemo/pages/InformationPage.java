@@ -14,4 +14,15 @@ public class InformationPage {
     @FindBy(xpath = "//span[.='Checkout: Overview']")
     public WebElement checkoutHeader;
 
+    @FindBy(xpath = "//div[@class='summary_subtotal_label']")
+    public WebElement itemTotal;
+
+    @FindBy(xpath = "//div[@class='summary_total_label']")
+    public WebElement total;
+
+    @FindBy(id = "finish")
+    public WebElement finishBtn;
+
+
+
 }

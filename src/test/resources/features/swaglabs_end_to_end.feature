@@ -12,7 +12,7 @@ Feature: Shopping feature
     And user enters valid password
     Then user should see home page
 
-    Then user should verify that 6 items are displayed
+    Then user should verify that 6 items are displayed and count expected price of all items
 
     When user add all item to cart
     And user should be able to click on cart button
@@ -24,6 +24,7 @@ Feature: Shopping feature
     Then user should be able to see "CHECKOUT: YOUR INFORMATION"
 
 
+
     When user should be able to type user information:
       | first name      | James |
       | last name       | Bond  |
@@ -32,6 +33,7 @@ Feature: Shopping feature
     And user click on continue button
     Then user should be able to see "CHECKOUT: OVERVIEW" page
 
-    When user should be able to see total price
+    And verify that user is able to see total price and verify items total price equals to expected price of items
     And user should be able click on "Finish" button
-    Then user should be able to see "THANK YOU FOR YOUR ORDER" text
+    Then user should be able to see "THANK YOU FOR YOUR ORDER" header
+
