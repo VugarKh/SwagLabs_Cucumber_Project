@@ -1,9 +1,14 @@
 Feature: Shopping feature
 
-  User story: As a user, When I’m on the SwagLabs home page I should be able to add items one by one and
-  after each addition user should see that item in the cart and click on continue shopping button. When user added
-  all items to the cart, user should be able to see all items in the cart.Verify total price and user should be able
-  to proceed to checkout.
+  User story: As a user, I should be able to login to SwagLabs web application by using valid credentials and
+  when I’m on the SwagLabs home page I should be able to add items one by one in the cart and click on the cart
+  button. Then I should be redirected to the cart page where I should be able to see all the added items. After
+  verifying all items are in the cart I should be able to click checkout button and be redirected to the checkout:
+  information page. On this page I should be able to fill out form with first name, last name and zip/postal code
+  and by clicking on the continue button should be redirected to the checkout: overview page. On this page I
+  should be able to see total item price and total price. Total item price should match expected price. After
+  clicking finish button I should be redirected to the checkout: complete page where I should be able to verify
+  THANK YOU FOR YOUR ORDER message.
 
 
   Scenario:
