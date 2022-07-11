@@ -48,7 +48,6 @@ public class SwagLabStepDef {
         Assert.assertEquals(expected, actual);
     }
 
-
     @Then("user should verify that {int} items are displayed and count expected price of all items")
     public void userShouldVerifyThatItemsAreDisplayedAndCountExpectedPriceOfAllItems(int quantityOfItems) {
         Assert.assertEquals(quantityOfItems, basePage.allItems.size());
@@ -56,7 +55,6 @@ public class SwagLabStepDef {
             getAllItemsTotalPrice += Double.parseDouble(each.getText().substring(1));
         }
     }
-
 
     @When("user add all item to cart")  //Test 3
     public void userAddAllItemToCart() {
@@ -68,26 +66,21 @@ public class SwagLabStepDef {
         }
     }
 
-
     @And("user should be able to click on cart button")
     public void userShouldBeAbleToClickOnCartButton() {
         basePage.shoppingCart.click();
     }
-
-
 
     @Then("verify that user is on the cart page")  //Test 4
     public void verifyThatUserIsOnTheCartPage() {
         String expectedHeader = "YOUR CART";
         String actualHeader =cartPage.your_cart.getText();
         Assert.assertEquals(expectedHeader,actualHeader);
-
     }
 
     @And("user should be able to see all {int} items on cart")
     public void userShouldBeAbleToSeeAllItemsOnCart(int numberOfItems) {
         Assert.assertEquals(numberOfItems,cartPage.CartItems.size());
-
     }
 
     @When("user click on checkout button")
@@ -140,7 +133,5 @@ public class SwagLabStepDef {
         Assert.assertEquals(expectedHeader,checkOutCompletePage.thankYouMsgHeader.getText());
 
     }
-
-
 
 }

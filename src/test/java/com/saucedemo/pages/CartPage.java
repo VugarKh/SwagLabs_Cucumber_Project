@@ -8,30 +8,18 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 
 public class CartPage {
-
-
     public CartPage(){
 
         PageFactory.initElements(Driver.getDriver(),this);
-
     }
-
     @FindBy(xpath = "//div[@class='cart_item']")
     public List<WebElement> CartItems;
-
-
-
-
     @FindBy(xpath = "//span[.='Your Cart']")
     public WebElement your_cart;
-
     @FindBy(linkText = "Sauce Labs Backpack")
     public WebElement sauce_labs_backpack;
-
-
     @FindBy (linkText = "Sauce Labs Bike Light")
     public WebElement sauce_labs_bike_light;
-
     @FindBy (linkText = "Sauce Labs Fleece Jacket")
     public WebElement sauce_labs_fleece_jacket;
 

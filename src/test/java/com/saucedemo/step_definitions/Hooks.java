@@ -10,15 +10,11 @@ import org.openqa.selenium.TakesScreenshot;
 
 public class Hooks {
 
-
-    // @Before is coming from cucumber. It is running before each scenario
     @Before
     public void setUpScenario(){
         System.out.println("--> It is coming from @Before in Hooks ");
     }
 
-
-    // @After is coming from cucumber. It is running after each scenario
     @After
     public void teardownScenario(Scenario scenario){
         System.out.println("--> It is coming from @After in Hooks ");
@@ -29,7 +25,6 @@ public class Hooks {
             scenario.attach(screenshot, "image/png", scenario.getName());
 
         }
-
         Driver.closeDriver();
     }
 
